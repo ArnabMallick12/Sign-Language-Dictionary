@@ -13,7 +13,7 @@ export const searchWord = createAsyncThunk(
   'words/searchWord',
   async (searchTerm, { rejectWithValue }) => {
     try {
-      const response = await axiosInstance.get(`/words/${searchTerm}`);
+      const response = await axiosInstance.get(`/words/search/${encodeURIComponent(searchTerm)}`);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response?.data?.message || 'Failed to search words');

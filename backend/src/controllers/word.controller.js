@@ -12,15 +12,22 @@ export const getWords = async (req, res) => {
 export const getAWord = async (req, res) => {
     const { query } = req.params;
     
+    if (!query) {
+        return res.status(400).json({ message: 'Search query is required' });
+    }
+    
     try {
         // Make the search case-insensitive and use regex for partial matches
         const words = await Word.find({
-            word: { $regex: new RegExp(query, 'i') }
+            $or: [
+                { word: { $regex: new RegExp(query, 'i') } },
+                { definition: { $regex: new RegExp(query, 'i') } }
+            ]
         });
         
         res.status(200).json(words);
     } catch (error) {
-        res.status(500).json({ message: 'Error fetching word', error });
+        res.status(500).json({ message: 'Error searching words', error: error.message });
     }
 }
 
