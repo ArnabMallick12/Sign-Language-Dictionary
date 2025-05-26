@@ -9,7 +9,10 @@ const port = process.env.PORT || 5002;
 
 const app = express();
 app.use(cors({
-  origin: 'http://localhost:5173', // Adjust this to your frontend URL
+  origin: [
+    'http://localhost:5173',
+    'https://sign-language-dictionary-eight.vercel.app/'
+  ], // Adjust this to your frontend URL
   credentials: true
 }));
 app.use(express.json());
