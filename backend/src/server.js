@@ -11,7 +11,7 @@ const app = express();
 app.use(cors({
   origin: [
     'http://localhost:5173',
-    'https://sign-language-dictionary-eight.vercel.app/'
+    'https://sign-language-dictionary-eight.vercel.app'
   ], // Adjust this to your frontend URL
   credentials: true
 }));
